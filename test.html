@@ -1,0 +1,72 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="css/mui.min.css" rel="stylesheet" />
+	</head>
+
+	<body>
+		<script src="js/mui.min.js"></script>
+		<script type="text/javascript">
+			mui.init()
+			
+			
+var json = {  contry:{
+    "response": {
+        "items": {
+            "item": [
+                {
+                    "commission": 17.63,
+                    "commission_num": "205",
+                    "commission_rate": "2050.00",
+                    "volume": 4345
+                },
+                {
+                    "commission": 34.44,
+                    "commission_num": "153",
+                    "commission_rate": "2050.00",
+                    "volume": 3478
+                }
+            ]
+        },
+        "total_results": 7561117,
+        "request_id": "14sn1rq5ps5mx"
+    }
+}
+ };
+//方式一：使用eval解析
+var obj = eval(json);  
+alert(obj.contry.response.items.item[0].commission); //打印出来
+ for(var str in obj.contry.response.items.item){
+            	//alert(str.commission_num);
+            	alert(obj.contry.response.items.item[str].volume);	
+            	document.write("<h1>"+obj.contry.response.items.item[str].commission_num+"</h1></p>")
+}	
+
+
+
+
+//		$.each(obj.contry.response.items.item,function(idx,item){   
+// //输出  
+// alert(item.commission_num+"哈哈"+item.commission);   
+//})	
+	
+		</script>
+		
+		<script>
+			
+var employees = [
+{ "firstName":"Bill" , "lastName":"Gates" },
+{ "firstName":"George" , "lastName":"Bush" },
+{ "firstName":"Thomas" , "lastName": "Carter" }
+];
+//alert(employees[0].lastName); // 方式一
+//alert(employees[0]["lastName"]); // 方式二
+			
+		</script>
+	</body>
+
+</html>
