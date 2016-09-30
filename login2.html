@@ -1,0 +1,65 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+		<link href="css/mui.min.css" rel="stylesheet" />
+		<script src="js/app.js"></script>
+		<script src="js/mui.min.js"></script>
+
+	</head>
+
+	<body>
+
+		<header class="mui-bar mui-bar-nav">
+			<h1 class="mui-title">登录</h1>
+		</header>
+
+		<div class="mui-content">
+			<div class="mui-content-padded" style="margin: 5px;">
+				<form class="mui-input-group">
+					<div class="mui-input-row">
+						<label>用户名</label>
+						<input type="text" id="username" placeholder="用户名">
+					</div>
+					<div class="mui-input-row">
+						<label>密码</label>
+						<input type="password" id="userpassword" placeholder="密码">
+					</div>
+				</form>
+			</div>
+			<div style="margin-top:20px;text-align: center;">
+				<button class="mui-btn mui-btn-primary" id="loginBtn">登录</button> &nbsp;&nbsp;
+				<button class="mui-btn mui-btn-primary" id="regBtn">注册</button>
+			</div>
+		</div>
+
+		<div class="mui-bar mui-bar-tab" style="height:20px;line-height:20px;font-size:10px;text-align:center;">
+			这是底部信息
+		</div>
+
+		<script type="text/javascript">
+			mui.init()
+			mui.plusReady(
+				function() {
+					document.getElementById("loginBtn").addEventListener('tap', function() {
+						alert("点击了登录按钮");
+//						var wd = plus.nativeUI.showWaiting();
+//						
+//						var data = {"userName": $id('username').value,
+//						            "userPassword":md5Hash($id('userpassword').value)
+//						           };
+//						           
+//						postData()
+
+					});
+				}
+			);
+		</script>
+	</body>
+
+</html>
