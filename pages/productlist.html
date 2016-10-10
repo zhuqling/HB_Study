@@ -11,34 +11,34 @@
 		<!--标准mui.css-->
 		<link rel="stylesheet" href="../css/mui.min.css">
 		<!--App自定义的css-->
-		<link rel="stylesheet" type="text/css" href="../css/app.css"/>
+		<link rel="stylesheet" type="text/css" href="../css/app.css" />
 		<style>
-			h5{
-		        padding-top: 8px;
-		        padding-bottom: 8px;
-		        text-indent: 12px;
-		    }
-		    
-			.mui-table-view.mui-grid-view .mui-table-view-cell .mui-media-body{
+			h5 {
+				padding-top: 8px;
+				padding-bottom: 8px;
+				text-indent: 12px;
+			}
+			
+			.mui-table-view.mui-grid-view .mui-table-view-cell .mui-media-body {
 				font-size: 15px;
-				margin-top:8px;
+				margin-top: 8px;
 				color: #333;
-			} 
+			}
 		</style>
 	</head>
 
-</script>
+	<!--</script>-->
+
 	<body>
 		<header class="mui-bar mui-bar-nav">
-		    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
-		    <h1 class="mui-title">图文表格</h1>
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title">图文表格</h1>
 		</header>
 		<div class="mui-content" style="background-color:#fff">
-		    <h5 style="background-color:#efeff4" id="s">慢生活</h5>
-		    					<button type="button" id="confirm" class="mui-btn mui-btn-royal search-button">发送请求</button>
+			<button type="button" id="confirm" class="mui-btn mui-btn-royal search-button">发送请求</button>
 
-		    <ul class="mui-table-view mui-grid-view">
-		        <li class="mui-table-view-cell mui-media mui-col-xs-6">
+			<ul id="ddd" class="mui-table-view mui-grid-view">
+				<!--<li class="mui-table-view-cell mui-media mui-col-xs-6">
 		            <a href="#">
 		                <img class="mui-media-object" src="../images/shuijiao.jpg">
 		                <div class="mui-media-body">幸福就是可以一起睡觉</div></a></li>
@@ -46,16 +46,12 @@
 		            <a href="#">
 		                <img class="mui-media-object" src="../images/muwu.jpg">
 		                <div class="mui-media-body">想要一间这样的木屋，静静的喝咖啡</div></a></li>
-		        <li class="mui-table-view-cell mui-media mui-col-xs-6">
-		            <a href="#"><img class="mui-media-object" src="../images/cbd.jpg">
-		                <div class="mui-media-body">Color of SIP CBD</div></a></li>
-		        <li class="mui-table-view-cell mui-media mui-col-xs-6">
-		            <a href="#">
-		                <img class="mui-media-object" src="../images/yuantiao.jpg">
-		                <div class="mui-media-body">静静看这世界</div></a></li>
-		   
-		    <script src="../js/mui.min.js"></script>
-	<script>
+		         -->
+
+			</ul>
+		</div>
+		<script src="../js/mui.min.js"></script>
+		<script>
 			(function($, doc) {
 				$.init();
 
@@ -77,35 +73,33 @@
 					//得到数据之后的操作
 
 					alert(response);
- 
+
 					var obj = eval("(" + response + ")");
-									//var obj = eval(response);
+					//var obj = eval(response);
 					alert(obj.atb_items_get_response.items.aitaobao_item[0].commission); //打印出来
-					alert(obj.atb_items_get_response.items.aitaobao_item.length+"dd"); //打印出来
-address_html='';
-//方式一：使用eval解析
-   for(i=0;i<obj.atb_items_get_response.items.aitaobao_item.length;i++){
-//                for(var str in obj.atb_items_get_response.items.aitaobao_item){
-              var str = obj.atb_items_get_response.items.aitaobao_item[i];
-              alert(str.title);
-              
-//             <li class="mui-table-view-cell mui-media mui-col-xs-6">
-//		            <a href="#">
-//		                <img class="mui-media-object" src="../images/shuijiao.jpg">
-//		                <div class="mui-media-body">幸福就是可以一起睡觉</div></a></li>
+					alert(obj.atb_items_get_response.items.aitaobao_item.length + "dd"); //打印出来
+					address_html = '';
+					//方式一：使用eval解析
+					for(i = 0; i < obj.atb_items_get_response.items.aitaobao_item.length; i++) {
+						//                for(var str in obj.atb_items_get_response.items.aitaobao_item){
+						var str = obj.atb_items_get_response.items.aitaobao_item[i];
+						alert(str.pic_url);
 
-  address_html+="<li class='mui-table-view-cell mui-media mui-col-xs-6'>";       
-address_html+=" <a href=" + "www.baidu.com" + ">";
-address_html+="<img class='mui-media-object' src='" + str.pictures + "'";
-address_html+="<div class='mui-media-body'>" + str.title + "</div></a></li>";
+						//             <li class="mui-table-view-cell mui-media mui-col-xs-6">
+						//		            <a href="#">
+						//		                <img class="mui-media-object" src="../images/shuijiao.jpg">
+						//		                <div class="mui-media-body">幸福就是可以一起睡觉</div></a></li>
 
-address_html+='';
+						address_html += "<li class='mui-table-view-cell mui-media mui-col-xs-6'>";
+						address_html += " <a href=" + "'www.baidu.com'" + ">";
+						address_html += "<img class='mui-media-object' src='" + str.pic_url + "'/>";
+						address_html += "<div class='mui-media-body'>" + str.title + "</div></a></li>";
 
+						address_html += '';
 
-                  }
-   alert(address_html);
-   document.querySelector('div.mui-media-body')[i].innerHTML=address_html;
-
+					}
+					alert(address_html);
+					document.querySelector('#ddd').innerHTML = address_html;
 
 					//alert(obj.atb_items_get_response.items.aitaobao_item[0].commission); //打印出来
 
@@ -138,15 +132,9 @@ address_html+='';
 
 				});
 
-			
-				
-				
 			}(mui, document));
 		</script>
-		    
-		    </ul>    
-		</div>
-	
-	
-		</body>
+
+	</body>
+
 </html>
