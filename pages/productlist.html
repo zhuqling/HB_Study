@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>Hello MUI</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+		<!--标准mui.css-->
+		<link rel="stylesheet" href="../css/mui.min.css">
+		<!--App自定义的css-->
+		<link rel="stylesheet" type="text/css" href="../css/app.css"/>
+		<style>
+			h5{
+		        padding-top: 8px;
+		        padding-bottom: 8px;
+		        text-indent: 12px;
+		    }
+		    
+			.mui-table-view.mui-grid-view .mui-table-view-cell .mui-media-body{
+				font-size: 15px;
+				margin-top:8px;
+				color: #333;
+			} 
+		</style>
+	</head>
+
+</script>
+	<body>
+		<header class="mui-bar mui-bar-nav">
+		    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+		    <h1 class="mui-title">图文表格</h1>
+		</header>
+		<div class="mui-content" style="background-color:#fff">
+		    <h5 style="background-color:#efeff4" id="s">慢生活</h5>
+		    					<button type="button" id="confirm" class="mui-btn mui-btn-royal search-button">发送请求</button>
+
+		    <ul class="mui-table-view mui-grid-view">
+		        <li class="mui-table-view-cell mui-media mui-col-xs-6">
+		            <a href="#">
+		                <img class="mui-media-object" src="../images/shuijiao.jpg">
+		                <div class="mui-media-body">幸福就是可以一起睡觉</div></a></li>
+		        <li class="mui-table-view-cell mui-media mui-col-xs-6">
+		            <a href="#">
+		                <img class="mui-media-object" src="../images/muwu.jpg">
+		                <div class="mui-media-body">想要一间这样的木屋，静静的喝咖啡</div></a></li>
+		        <li class="mui-table-view-cell mui-media mui-col-xs-6">
+		            <a href="#"><img class="mui-media-object" src="../images/cbd.jpg">
+		                <div class="mui-media-body">Color of SIP CBD</div></a></li>
+		        <li class="mui-table-view-cell mui-media mui-col-xs-6">
+		            <a href="#">
+		                <img class="mui-media-object" src="../images/yuantiao.jpg">
+		                <div class="mui-media-body">静静看这世界</div></a></li>
+		   
+		    <script src="../js/mui.min.js"></script>
+	<script>
+			(function($, doc) {
+				$.init();
+
+				//发送请求测试
+
+				//定义请求方式
+				var methodEl = 'get'; //可以选get,post
+				//定义预期服务器范围的数据类型
+				var dataTypeEl = 'json'; //可以选json,xml，html
+				//成功响应的回调函数
+				var success = function(response) {
+					var dataType = dataTypeEl;
+					if(dataType === 'json') {
+						response = JSON.stringify(response); //JSON.stringify()将 JSON对象转为json字符串
+					} else if(dataType === 'xml') {
+						response = new XMLSerializer().serializeToString(response).replace(/</g, "&lt;").replace(/>/g, "&gt;");
+					}
+					/*--------------------------------------------------*/
+					//得到数据之后的操作
+
+					alert(response);
+ 
+					var obj = eval("(" + response + ")");
+									//var obj = eval(response);
+					alert(obj.atb_items_get_response.items.aitaobao_item[0].commission); //打印出来
+					alert(obj.atb_items_get_response.items.aitaobao_item.length+"dd"); //打印出来
+address_html='';
+//方式一：使用eval解析
+   for(i=0;i<obj.atb_items_get_response.items.aitaobao_item.length;i++){
+//                for(var str in obj.atb_items_get_response.items.aitaobao_item){
+              var str = obj.atb_items_get_response.items.aitaobao_item[i];
+              alert(str.title);
+              
+//             <li class="mui-table-view-cell mui-media mui-col-xs-6">
+//		            <a href="#">
+//		                <img class="mui-media-object" src="../images/shuijiao.jpg">
+//		                <div class="mui-media-body">幸福就是可以一起睡觉</div></a></li>
+
+  address_html+="<li class='mui-table-view-cell mui-media mui-col-xs-6'>";       
+address_html+=" <a href=" + "www.baidu.com" + ">";
+address_html+="<img class='mui-media-object' src='" + str.pictures + "'";
+address_html+="<div class='mui-media-body'>" + str.title + "</div></a></li>";
+
+address_html+='';
+
+
+                  }
+   alert(address_html);
+   document.querySelector('div.mui-media-body')[i].innerHTML=address_html;
+
+
+					//alert(obj.atb_items_get_response.items.aitaobao_item[0].commission); //打印出来
+
+					// toMain();
+					/*--------------------------------------------------*/
+				};
+				var ajax = function() {
+					//url地址
+					var url = "http://gw.api.taobao.com/router/rest?sign=CBF5047D71ED5EE75907FCA6DEBD0C89&timestamp=2016-10-09+16%3A11%3A18&v=2.0&app_key=23191195&method=taobao.atb.items.get&partner_id=top-apitools&session=6102b23f66c6c7bff9694333f7b1a8a16a271a5f488988a137369862&format=json&keyword=%E7%94%B7%E8%A3%85&force_sensitive_param_fuzzy=true&fields=open_iid%2Ctitle%2Cnick%2Cpic_url%2Cprice%2Ccommission%2Ccommission_rate%2Ccommission_num%2Ccommission_volume%2Cseller_credit_score%2Citem_location%2Cvolume";
+					//请求方式为post；
+					var type = methodEl;
+					//预期服务器范围的数据类型
+					var dataType = dataTypeEl;
+					//发送数据
+					var data = {}; //这个先暂时空着，后面再继续看
+					//发送请求
+					if(type === 'get') {
+						if(dataType === 'json') {
+							$.getJSON(url, data, success);
+						} else {
+							$.get(url, data, success, dataType);
+						}
+					} else if(type === 'post') {
+						$.post(url, data, success, dataType);
+					}
+				};
+				//发送请求按钮的点击事件
+				document.getElementById("confirm").addEventListener('tap', function() {
+					ajax();
+
+				});
+
+			
+				
+				
+			}(mui, document));
+		</script>
+		    
+		    </ul>    
+		</div>
+	
+	
+		</body>
+</html>

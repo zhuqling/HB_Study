@@ -126,6 +126,7 @@
 				<div class="link-area"><a id='login-test'>登录测试</a> 
 					<span class="spliter">|</span>
 					<button type="button" id="confirm" class="mui-btn mui-btn-royal search-button">发送请求</button>
+					<button type="button" id="productlist" class="mui-btn mui-btn-royal search-button">产品列表</button>
 
 				</div>
 			</div>
@@ -240,6 +241,7 @@
 					var regButton = doc.getElementById('reg');
 					var forgetButton = doc.getElementById('forgetPassword');
 			        var loginTestButton = doc.getElementById('login-test');
+			       // var loginTestButton = doc.getElementById('login-test');
 
 					loginButton.addEventListener('tap', function(event) {
 						var loginInfo = {
@@ -317,6 +319,7 @@
 					//发送请求测试
 					
 					 //定义请求方式
+					 /*
         var methodEl = 'get';    //可以选get,post
         //定义预期服务器范围的数据类型
         var dataTypeEl = 'json'; //可以选json,xml，html
@@ -328,12 +331,10 @@
             } else if (dataType === 'xml') {
                 response = new XMLSerializer().serializeToString(response).replace(/</g, "&lt;").replace(/>/g, "&gt;");
             }       
-         /*--------------------------------------------------*/
             //得到数据之后的操作
         
-            alert(response);
+           // alert(response);
            // toMain();
-        /*--------------------------------------------------*/
         };     
         var ajax = function() {
             //url地址
@@ -355,9 +356,10 @@
                     $.post(url, data, success, dataType);
             }  
         };
+        */
         //发送请求按钮的点击事件
         document.getElementById("confirm").addEventListener('tap', function() {
-            ajax();
+            //ajax();
                 	$.openWindow({
 							url: 'productList.html',
 							id: 'confirm',
@@ -372,9 +374,27 @@
 								autoShow: false
 							}
 						});
-        });       
+        });        
   
+//产品列表按钮
 
+        document.getElementById("productlist").addEventListener('tap', function() {
+            //ajax();
+                	$.openWindow({
+							url: 'pages/productList.html',
+							id: 'productlist',
+							preload: true,
+							show: {
+								aniShow: 'pop-in'
+							},
+							styles: {
+								popGesture: 'hide'
+							},
+							waiting: {
+								autoShow: false
+							}
+						});
+        });       
 					
 					
 					//、、、、、、、、、、、、、、、、、、、、、、、
