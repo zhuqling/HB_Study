@@ -12,6 +12,8 @@
 		<link rel="stylesheet" href="../css/mui.min.css">
 		<!--App自定义的css-->
 		<link rel="stylesheet" type="text/css" href="../css/app.css" />
+						<link rel="stylesheet" href="../css/productlist.css">
+
 		<style>
 			h5 {
 				padding-top: 8px;
@@ -37,18 +39,56 @@
 		<div class="mui-content" style="background-color:#fff">
 			<button type="button" id="confirm" class="mui-btn mui-btn-royal search-button">发送请求</button>
 
-			<ul id="ddd" class="mui-table-view mui-grid-view">
-				<!--<li class="mui-table-view-cell mui-media mui-col-xs-6">
-		            <a href="#">
-		                <img class="mui-media-object" src="../images/shuijiao.jpg">
-		                <div class="mui-media-body">幸福就是可以一起睡觉</div></a></li>
-		        <li class="mui-table-view-cell mui-media mui-col-xs-6">
-		            <a href="#">
-		                <img class="mui-media-object" src="../images/muwu.jpg">
-		                <div class="mui-media-body">想要一间这样的木屋，静静的喝咖啡</div></a></li>
-		         -->
+		
+		
 
-			</ul>
+			<ul id="ddd" class="good-list bdr-b seckilling">
+				<li class="bdr-bom" >
+					<a href="http://item.m.jd.com/product/10340423026.html" onclick="return seckillMPingCommoddity(this.href, '10340423026')">
+						<div class="skill-pic">
+							<div class="img"><img src="//m.360buyimg.com/mobilecms/s220x220_jfs/t2776/21/809803311/529403/d0a94eb5/57275d5dNce0a8795.jpg!q70.jpg" style="animation: fade 400ms 0s;"></div></div>
+						<p class="g-title">盼盼手撕面包 梅尼耶 软面包 华夫饼 糕点休闲零食传统糕点 法式面包 起酥点心 手撕面包1000g</p>
+						<p class="g-price"><i class="doller">￥</i>29<span class="f-s-12">.9</span></p>
+						<div class="skill-price">
+							<p class="g-price-odd"><del>￥32.9</del></p>
+							<div class="skill-lod"><span class="sale-count" id="sale-count-b">已秒<em>14%</em></span>
+								<div id="progress-b" class="kill-progress">
+									<div class="skill-pro-bg">
+										<p class="skill-iteam-progress"><span class="skill-pro-insetbg"><span class="skill-iteam-pro" style="width: 14%;"></span></span>
+										</p>
+									</div>
+								</div>
+							</div>
+						</div><span class="skill-count">去秒杀</span></a>
+				</li>
+				<li class="bdr-bom">
+					<a href="http://item.m.jd.com/product/3710066.html" onclick="return seckillMPingCommoddity(this.href, '3710066')">
+						<div class="skill-pic">
+							<div class="img"><img src="//m.360buyimg.com/mobilecms/s220x220_jfs/t3163/90/2909351582/208074/5462d164/57e8f01dNb39a74b8.jpg!q70.jpg" style="animation: fade 400ms 0s;"></div></div>
+						<p class="g-title">荣事达 （Royalstar ）多用途锅电火锅5L鸳鸯锅HG1826</p>
+						<p class="g-price"><i class="doller">￥</i>139<span class="f-s-12"></span></p>
+						<div class="skill-price">
+							<p class="g-price-odd"><del>￥299</del></p>
+							<div class="skill-lod"><span class="sale-count" id="sale-count-b">已秒<em>30%</em></span>
+								<div id="progress-b" class="kill-progress">
+									<div class="skill-pro-bg">
+										<p class="skill-iteam-progress"><span class="skill-pro-insetbg"><span class="skill-iteam-pro" style="width: 30%;"></span></span>
+										</p>
+									</div>
+								</div>
+							</div>
+						</div><span class="skill-count">去秒杀</span></a>
+				</li>
+				
+			
+		
+			
+		
+		</ul>
+
+		
+		
+		
 		</div>
 		<script src="../js/mui.min.js"></script>
 		<script>
@@ -83,17 +123,42 @@
 					for(i = 0; i < obj.atb_items_get_response.items.aitaobao_item.length; i++) {
 						//                for(var str in obj.atb_items_get_response.items.aitaobao_item){
 						var str = obj.atb_items_get_response.items.aitaobao_item[i];
-						alert(str.pic_url);
+//						alert(str.pic_url);
 
-						//             <li class="mui-table-view-cell mui-media mui-col-xs-6">
-						//		            <a href="#">
-						//		                <img class="mui-media-object" src="../images/shuijiao.jpg">
-						//		                <div class="mui-media-body">幸福就是可以一起睡觉</div></a></li>
+//<li class="bdr-bom">
+//					<a href="http://item.m.jd.com/product/3710066.html" onclick="return seckillMPingCommoddity(this.href, '3710066')">
+//						<div class="skill-pic">
+//							<div class="img">
+//							<img src="//m.360buyimg.com/mobilecms/s220x220_jfs/t3163/90/2909351582/208074/5462d164/57e8f01dNb39a74b8.jpg!q70.jpg" style="animation: fade 400ms 0s;"></div></div>
+//						<p class="g-title">荣事达 （Royalstar ）多用途锅电火锅5L鸳鸯锅HG1826</p>
+//						<p class="g-price"><i class="doller">￥</i>139<span class="f-s-12"></span></p>
+//						<div class="skill-price">
+//							<p class="g-price-odd"><del>￥299</del></p>
+//							<div class="skill-lod"><span class="sale-count" id="sale-count-b">已秒<em>30%</em></span>
+//								<div id="progress-b" class="kill-progress">
+//									<div class="skill-pro-bg">
+//										<p class="skill-iteam-progress"><span class="skill-pro-insetbg"><span class="skill-iteam-pro" style="width: 30%;"></span></span>
+//										</p>
+//									</div>
+//								</div>
+//							</div>
+//						</div><span class="skill-count">去秒杀</span></a>
+//				</li>
+						address_html += "<li class='bdr-bom'>";
+						address_html += " <a href=" + "'http://item.m.jd.com/product/3710066.html'" + ">";
+						address_html += "<div class='skill-pic'>";
+						address_html += "<div class='img'>";
 
-						address_html += "<li class='mui-table-view-cell mui-media mui-col-xs-6'>";
-						address_html += " <a href=" + "'www.baidu.com'" + ">";
-						address_html += "<img class='mui-media-object' src='" + str.pic_url + "'/>";
-						address_html += "<div class='mui-media-body'>" + str.title + "</div></a></li>";
+						address_html += "<img src='" + str.pic_url + "'" + "style='animation: fade 400ms 0s;'" + "></div></div>";
+						address_html += "<p class='g-title'>" + str.title + "</p>";
+						address_html += "<p class='g-price' ><i class='doller'>￥</i>" + str.price + "<span class='f-s-12'></span></p>";
+						address_html += "<div class='skill-price'>";
+						address_html += "<p class='g-price-odd' ><del>" + str.price + "</del></p>";
+						address_html += "<div class='skill-lod' ><span class='sale-count' id='sale-count-b'>已秒<em>30%</em></span>";
+						address_html += "<div id='progress-b' class='kill-progress'>";
+						address_html += "<div class='skill-pro-bg'>";
+						address_html += "<p class='skill-iteam-progress'><span class='skill-pro-insetbg'><span class='skill-iteam-pro' style='width: 30%;'></span></span>";
+						address_html += "</p></div></div><div></div><span class='skill-count'>去秒杀</span></a></li>";
 
 						address_html += '';
 
@@ -103,12 +168,11 @@
 
 					//alert(obj.atb_items_get_response.items.aitaobao_item[0].commission); //打印出来
 
-					// toMain();
 					/*--------------------------------------------------*/
 				};
 				var ajax = function() {
 					//url地址
-					var url = "http://gw.api.taobao.com/router/rest?sign=CBF5047D71ED5EE75907FCA6DEBD0C89&timestamp=2016-10-09+16%3A11%3A18&v=2.0&app_key=23191195&method=taobao.atb.items.get&partner_id=top-apitools&session=6102b23f66c6c7bff9694333f7b1a8a16a271a5f488988a137369862&format=json&keyword=%E7%94%B7%E8%A3%85&force_sensitive_param_fuzzy=true&fields=open_iid%2Ctitle%2Cnick%2Cpic_url%2Cprice%2Ccommission%2Ccommission_rate%2Ccommission_num%2Ccommission_volume%2Cseller_credit_score%2Citem_location%2Cvolume";
+					var url = "http://gw.api.taobao.com/router/rest?sign=2E6CD6F164D108BB9B18CD56166BFB1D&timestamp=2016-10-10+17%3A09%3A48&v=2.0&app_key=23191195&method=taobao.atb.items.get&partner_id=top-apitools&session=61025056d4b911fc362d37168b8a5d622d90192b5851140137369862&format=json&keyword=%E5%A5%B3%E8%A3%85&force_sensitive_param_fuzzy=true&fields=open_iid%2Ctitle%2Cnick%2Cpic_url%2Cprice%2Ccommission%2Ccommission_rate%2Ccommission_num%2Ccommission_volume%2Cseller_credit_score%2Citem_location%2Cvolume";
 					//请求方式为post；
 					var type = methodEl;
 					//预期服务器范围的数据类型
