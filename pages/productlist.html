@@ -12,7 +12,7 @@
 		<link rel="stylesheet" href="../css/mui.min.css">
 		<!--App自定义的css-->
 		<link rel="stylesheet" type="text/css" href="../css/app.css" />
-						<link rel="stylesheet" href="../css/productlist.css">
+		<link rel="stylesheet" href="../css/productlist.css">
 
 		<style>
 			h5 {
@@ -32,21 +32,41 @@
 	<!--</script>-->
 
 	<body>
+		
+		<script type="text/javascript">
+    (function(win,doc){
+        var s = doc.createElement("script"), h = doc.getElementsByTagName("head")[0];
+        if (!win.alimamatk_show) {
+            s.charset = "gbk";
+            s.async = true;
+            s.src = "http://a.alimama.cn/tkapi.js";
+            h.insertBefore(s, h.firstChild);
+        };
+        var o = {
+            pid: "mm_17105806_13124673_52572651",/*推广单元ID，用于区分不同的推广渠道*/
+            appkey: "",/*通过TOP平台申请的appkey，设置后引导成交会关联appkey*/
+            unid: "",/*自定义统计字段*/
+            type: "click" /* click 组件的入口标志 （使用click组件必设）*/
+        };
+        win.alimamatk_onload = win.alimamatk_onload || [];
+        win.alimamatk_onload.push(o);
+    })(window,document);
+</script>
+
+
 		<header class="mui-bar mui-bar-nav">
 			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
 			<h1 class="mui-title">图文表格</h1>
 		</header>
-		<div class="mui-content" style="background-color:#fff">
-			<button type="button" id="confirm" class="mui-btn mui-btn-royal search-button">发送请求</button>
-
-		
-		
+		<div id="pullrefresh" class="mui-content" style="background-color:#fff">
+			<!--<button type="button" id="confirm" class="mui-btn mui-btn-royal search-button">发送请求</button>-->
 
 			<ul id="ddd" class="good-list bdr-b seckilling">
-				<li class="bdr-bom" >
+				<!--<li class="bdr-bom">
 					<a href="http://item.m.jd.com/product/10340423026.html" onclick="return seckillMPingCommoddity(this.href, '10340423026')">
 						<div class="skill-pic">
-							<div class="img"><img src="//m.360buyimg.com/mobilecms/s220x220_jfs/t2776/21/809803311/529403/d0a94eb5/57275d5dNce0a8795.jpg!q70.jpg" style="animation: fade 400ms 0s;"></div></div>
+							<div class="img"><img src="//m.360buyimg.com/mobilecms/s220x220_jfs/t2776/21/809803311/529403/d0a94eb5/57275d5dNce0a8795.jpg!q70.jpg" style="animation: fade 400ms 0s;"></div>
+						</div>
 						<p class="g-title">盼盼手撕面包 梅尼耶 软面包 华夫饼 糕点休闲零食传统糕点 法式面包 起酥点心 手撕面包1000g</p>
 						<p class="g-price"><i class="doller">￥</i>29<span class="f-s-12">.9</span></p>
 						<div class="skill-price">
@@ -64,7 +84,8 @@
 				<li class="bdr-bom">
 					<a href="http://item.m.jd.com/product/3710066.html" onclick="return seckillMPingCommoddity(this.href, '3710066')">
 						<div class="skill-pic">
-							<div class="img"><img src="//m.360buyimg.com/mobilecms/s220x220_jfs/t3163/90/2909351582/208074/5462d164/57e8f01dNb39a74b8.jpg!q70.jpg" style="animation: fade 400ms 0s;"></div></div>
+							<div class="img"><img src="//m.360buyimg.com/mobilecms/s220x220_jfs/t3163/90/2909351582/208074/5462d164/57e8f01dNb39a74b8.jpg!q70.jpg" style="animation: fade 400ms 0s;"></div>
+						</div>
 						<p class="g-title">荣事达 （Royalstar ）多用途锅电火锅5L鸳鸯锅HG1826</p>
 						<p class="g-price"><i class="doller">￥</i>139<span class="f-s-12"></span></p>
 						<div class="skill-price">
@@ -78,25 +99,33 @@
 								</div>
 							</div>
 						</div><span class="skill-count">去秒杀</span></a>
-				</li>
-				
-			
-		
-			
-		
-		</ul>
+				</li>-->
 
-		
-		
-		
+			</ul>
+
 		</div>
 		<script src="../js/mui.min.js"></script>
 		<script>
 			(function($, doc) {
-				$.init();
+				$.init({
+					pullRefresh: {
+						container: '#pullrefresh',
+						down: {
+							callback: pulldownRefresh
+						},
+						up: {
+							contentrefresh: '正在加载...',
+							callback: pullupRefresh
+						}
+					}
+				});
 
+				var datalength; //定义默认数据长度
+				var counPer = 20; //定义每次只加载20个数据
+				var count = 0; //定义加载次数
+				var countZ = 0;
+				var obj;
 				//发送请求测试
-
 				//定义请求方式
 				var methodEl = 'get'; //可以选get,post
 				//定义预期服务器范围的数据类型
@@ -112,67 +141,52 @@
 					/*--------------------------------------------------*/
 					//得到数据之后的操作
 
-					alert(response);
+					//					alert(response);
 
-					var obj = eval("(" + response + ")");
-					//var obj = eval(response);
-					alert(obj.atb_items_get_response.items.aitaobao_item[0].commission); //打印出来
-					alert(obj.atb_items_get_response.items.aitaobao_item.length + "dd"); //打印出来
-					address_html = '';
-					//方式一：使用eval解析
-					for(i = 0; i < obj.atb_items_get_response.items.aitaobao_item.length; i++) {
-						//                for(var str in obj.atb_items_get_response.items.aitaobao_item){
-						var str = obj.atb_items_get_response.items.aitaobao_item[i];
-//						alert(str.pic_url);
+					obj = eval("(" + response + ")");
+					datalength = obj.tbk_item_get_response.results.n_tbk_item.length;
+					                alert(datalength);
+					if(datalength % counPer == 0) {
+						countZ = datalength / counPer;
+					} else {
 
-//<li class="bdr-bom">
-//					<a href="http://item.m.jd.com/product/3710066.html" onclick="return seckillMPingCommoddity(this.href, '3710066')">
-//						<div class="skill-pic">
-//							<div class="img">
-//							<img src="//m.360buyimg.com/mobilecms/s220x220_jfs/t3163/90/2909351582/208074/5462d164/57e8f01dNb39a74b8.jpg!q70.jpg" style="animation: fade 400ms 0s;"></div></div>
-//						<p class="g-title">荣事达 （Royalstar ）多用途锅电火锅5L鸳鸯锅HG1826</p>
-//						<p class="g-price"><i class="doller">￥</i>139<span class="f-s-12"></span></p>
-//						<div class="skill-price">
-//							<p class="g-price-odd"><del>￥299</del></p>
-//							<div class="skill-lod"><span class="sale-count" id="sale-count-b">已秒<em>30%</em></span>
-//								<div id="progress-b" class="kill-progress">
-//									<div class="skill-pro-bg">
-//										<p class="skill-iteam-progress"><span class="skill-pro-insetbg"><span class="skill-iteam-pro" style="width: 30%;"></span></span>
-//										</p>
-//									</div>
-//								</div>
-//							</div>
-//						</div><span class="skill-count">去秒杀</span></a>
-//				</li>
-						address_html += "<li class='bdr-bom'>";
-						address_html += " <a href=" + "'http://item.m.jd.com/product/3710066.html'" + ">";
-						address_html += "<div class='skill-pic'>";
-						address_html += "<div class='img'>";
-
-						address_html += "<img src='" + str.pic_url + "'" + "style='animation: fade 400ms 0s;'" + "></div></div>";
-						address_html += "<p class='g-title'>" + str.title + "</p>";
-						address_html += "<p class='g-price' ><i class='doller'>￥</i>" + str.price + "<span class='f-s-12'></span></p>";
-						address_html += "<div class='skill-price'>";
-						address_html += "<p class='g-price-odd' ><del>" + str.price + "</del></p>";
-						address_html += "<div class='skill-lod' ><span class='sale-count' id='sale-count-b'>已秒<em>30%</em></span>";
-						address_html += "<div id='progress-b' class='kill-progress'>";
-						address_html += "<div class='skill-pro-bg'>";
-						address_html += "<p class='skill-iteam-progress'><span class='skill-pro-insetbg'><span class='skill-iteam-pro' style='width: 30%;'></span></span>";
-						address_html += "</p></div></div><div></div><span class='skill-count'>去秒杀</span></a></li>";
-
-						address_html += '';
-
+						countZ = datalength / counPer + 1;
 					}
-					alert(address_html);
-					document.querySelector('#ddd').innerHTML = address_html;
+					//                                    alert(countZ);
 
-					//alert(obj.atb_items_get_response.items.aitaobao_item[0].commission); //打印出来
+					//					address_html = '';
+					//					//方式一：使用eval解析
+					//					for(i = 0; i < datalength ; i++) {
+					//						//                for(var str in obj.atb_items_get_response.items.aitaobao_item){
+					//						var str = obj.atb_items_get_response.items.aitaobao_item[i];
+					//
+					//						address_html += "<li class='bdr-bom'>";
+					//						address_html += " <a href=" + "'http://item.m.jd.com/product/3710066.html'" + ">";
+					//						address_html += "<div class='skill-pic'>";
+					//						address_html += "<div class='img'>";
+					//
+					//						address_html += "<img src='" + str.pic_url + "'" + "style='animation: fade 400ms 0s;'" + "></div></div>";
+					//						address_html += "<p class='g-title'>" + str.title + "</p>";
+					//						address_html += "<p class='g-price' ><i class='doller'>￥</i>" + str.price + "<span class='f-s-12'></span></p>";
+					//						address_html += "<div class='skill-price'>";
+					//						address_html += "<p class='g-price-odd' ><del>" + str.price + "</del></p>";
+					//						address_html += "<div class='skill-lod' ><span class='sale-count' id='sale-count-b'>已秒<em>30%</em></span>";
+					//						address_html += "<div id='progress-b' class='kill-progress'>";
+					//						address_html += "<div class='skill-pro-bg'>";
+					//						address_html += "<p class='skill-iteam-progress'><span class='skill-pro-insetbg'><span class='skill-iteam-pro' style='width: 30%;'></span></span>";
+					//						address_html += "</p></div></div><div></div><span class='skill-count'>去秒杀</span></a></li>";
+					//
+					//						address_html += '';
+					//
+					//					}
+					//					//alert(address_html);
+					//					document.querySelector('#ddd').innerHTML = address_html;
 
 					/*--------------------------------------------------*/
 				};
 				var ajax = function() {
 					//url地址
-					var url = "http://gw.api.taobao.com/router/rest?sign=2E6CD6F164D108BB9B18CD56166BFB1D&timestamp=2016-10-10+17%3A09%3A48&v=2.0&app_key=23191195&method=taobao.atb.items.get&partner_id=top-apitools&session=61025056d4b911fc362d37168b8a5d622d90192b5851140137369862&format=json&keyword=%E5%A5%B3%E8%A3%85&force_sensitive_param_fuzzy=true&fields=open_iid%2Ctitle%2Cnick%2Cpic_url%2Cprice%2Ccommission%2Ccommission_rate%2Ccommission_num%2Ccommission_volume%2Cseller_credit_score%2Citem_location%2Cvolume";
+					var url = "http://gw.api.taobao.com/router/rest?sign=837F541416FAD7F641D17E0FED84ED3A&timestamp=2016-10-11+11%3A41%3A30&v=2.0&app_key=23477610&method=taobao.tbk.item.get&partner_id=top-apitools&session=61025056d4b911fc362d37168b8a5d622d90192b5851140137369862&format=json&q=%E5%A5%B3%E8%A3%85&force_sensitive_param_fuzzy=true&fields=num_iid%2Ctitle%2Cpict_url%2Csmall_images%2Creserve_price%2Czk_final_price%2Cuser_type%2Cprovcity%2Citem_url%2Cseller_id%2Cvolume%2Cnick";
 					//请求方式为post；
 					var type = methodEl;
 					//预期服务器范围的数据类型
@@ -190,11 +204,86 @@
 						$.post(url, data, success, dataType);
 					}
 				};
-				//发送请求按钮的点击事件
-				document.getElementById("confirm").addEventListener('tap', function() {
-					ajax();
 
-				});
+				/**
+				 * 下拉刷新具体业务实现
+				 */
+				function pulldownRefresh() {
+					setTimeout(function() {
+
+						mui('#pullrefresh').pullRefresh().endPulldownToRefresh(); //refresh completed
+					}, 1500);
+				}
+				var countX = 0;
+				/**
+				 * 上拉加载具体业务实现
+				 */
+				function pullupRefresh() {
+					setTimeout(function() {
+
+						mui('#pullrefresh').pullRefresh().endPullupToRefresh((++count == countZ)); //参数为true代表没有更多数据了。
+//						alert(obj.atb_items_get_response.items.aitaobao_item.length);
+						address_html = '';
+						//					alert(count);
+						for(var i = 0, len = count * 20; i < len; i++) {
+
+							var str = obj.tbk_item_get_response.results.n_tbk_item[i];
+
+							//						var li = document.createElement('li');
+							//						li.className = 'bdr-bom';
+							address_html += "<li class='bdr-bom'>";
+
+							address_html += " <a href=" + "'" + str.item_url + "'" + ">";
+							address_html += "<div class='skill-pic'>";
+							address_html += "<div class='img'>";
+
+							address_html += "<img src='" + str.pict_url + "'" + "style='animation: fade 400ms 0s;'" + "></div></div>";
+							address_html += "<p class='g-title'>" + str.title + "</p>";
+							address_html += "<p class='g-price' ><i class='doller'>￥</i>" + str.zk_final_price + "<span class='f-s-12'></span></p>";
+							address_html += "<div class='skill-price'>";
+							address_html += "<p class='g-price-odd' ><del>" + str.reserve_price + "</del></p>";
+							address_html += "<div class='skill-lod' ><span class='sale-count' id='sale-count-b'>已秒<em>30%</em></span>";
+							address_html += "<div id='progress-b' class='kill-progress'>";
+							address_html += "<div class='skill-pro-bg'>";
+							address_html += "<p class='skill-iteam-progress'><span class='skill-pro-insetbg'><span class='skill-iteam-pro' style='width: 30%;'></span></span>";
+							address_html += "</p></div></div><div></div><span class='skill-count'>去秒杀</span></a>";
+
+							//						li.innerHTML = address_html;
+
+						}
+						//					alert(address_html);
+						document.querySelector('#ddd').innerHTML = address_html;
+
+					}, 1500);
+				}
+				if(mui.os.plus) {
+					mui.plusReady(function() {
+						setTimeout(function() {
+							mui('#pullrefresh').pullRefresh().pullupLoading();
+						}, 1000);
+
+					});
+				} else {
+					mui.ready(function() {
+						mui('#pullrefresh').pullRefresh().pullupLoading();
+					});
+				}
+
+
+function clickUrl(url){
+	mui.openWindow({
+    url:'productdetail.html',
+    id:'productdetail.html',
+    extras:{
+        
+        url:url
+    }
+});
+}
+         var itemid;
+        document.getElementById("productlist").addEventListener('tap', function() {
+
+				ajax();
 
 			}(mui, document));
 		</script>

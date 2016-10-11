@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>Hello MUI</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+		<!--标准mui.css-->
+		<link rel="stylesheet" href="../css/mui.min.css">
+		<!--App自定义的css-->
+		<link rel="stylesheet" type="text/css" href="../css/app.css" />
+						<link rel="stylesheet" href="../css/productlist.css">
+
+		<style>
+			h5 {
+				padding-top: 8px;
+				padding-bottom: 8px;
+				text-indent: 12px;
+			}
+			
+			.mui-table-view.mui-grid-view .mui-table-view-cell .mui-media-body {
+				font-size: 15px;
+				margin-top: 8px;
+				color: #333;
+			}
+		</style>
+	</head>
+
+	<!--</script>-->
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title">图文表格</h1>
+		</header>
+		<div class="mui-content" style="background-color:#fff">
+			<!--<button type="button" id="confirm" class="mui-btn mui-btn-royal search-button">发送请求</button>-->
+
+		
+		
+
+			<ul id="ddd" class="good-list bdr-b seckilling">
+				<li class="bdr-bom" >
+					<a href="http://item.m.jd.com/product/10340423026.html" onclick="return seckillMPingCommoddity(this.href, '10340423026')">
+						<div class="skill-pic">
+							<div class="img"><img src="//m.360buyimg.com/mobilecms/s220x220_jfs/t2776/21/809803311/529403/d0a94eb5/57275d5dNce0a8795.jpg!q70.jpg" style="animation: fade 400ms 0s;"></div></div>
+						<p class="g-title">盼盼手撕面包 梅尼耶 软面包 华夫饼 糕点休闲零食传统糕点 法式面包 起酥点心 手撕面包1000g</p>
+						<p class="g-price"><i class="doller">￥</i>29<span class="f-s-12">.9</span></p>
+						<div class="skill-price">
+							<p class="g-price-odd"><del>￥32.9</del></p>
+							<div class="skill-lod"><span class="sale-count" id="sale-count-b">已秒<em>14%</em></span>
+								<div id="progress-b" class="kill-progress">
+									<div class="skill-pro-bg">
+										<p class="skill-iteam-progress"><span class="skill-pro-insetbg"><span class="skill-iteam-pro" style="width: 14%;"></span></span>
+										</p>
+									</div>
+								</div>
+							</div>
+						</div><span class="skill-count">去秒杀</span></a>
+				</li>
+				<li class="bdr-bom">
+					<a href="http://item.m.jd.com/product/3710066.html" onclick="return seckillMPingCommoddity(this.href, '3710066')">
+						<div class="skill-pic">
+							<div class="img"><img src="//m.360buyimg.com/mobilecms/s220x220_jfs/t3163/90/2909351582/208074/5462d164/57e8f01dNb39a74b8.jpg!q70.jpg" style="animation: fade 400ms 0s;"></div></div>
+						<p class="g-title">荣事达 （Royalstar ）多用途锅电火锅5L鸳鸯锅HG1826</p>
+						<p class="g-price"><i class="doller">￥</i>139<span class="f-s-12"></span></p>
+						<div class="skill-price">
+							<p class="g-price-odd"><del>￥299</del></p>
+							<div class="skill-lod"><span class="sale-count" id="sale-count-b">已秒<em>30%</em></span>
+								<div id="progress-b" class="kill-progress">
+									<div class="skill-pro-bg">
+										<p class="skill-iteam-progress"><span class="skill-pro-insetbg"><span class="skill-iteam-pro" style="width: 30%;"></span></span>
+										</p>
+									</div>
+								</div>
+							</div>
+						</div><span class="skill-count">去秒杀</span></a>
+				</li>
+				
+			
+		
+			
+		
+		</ul>
+
+		
+		
+		
+		</div>
+		<script src="../js/mui.min.js"></script>
+		<script>
+			(function($, doc) {
+				$.init();
+
+				//发送请求测试
+
+				//定义请求方式
+				var methodEl = 'get'; //可以选get,post
+				//定义预期服务器范围的数据类型
+				var dataTypeEl = 'json'; //可以选json,xml，html
+				//成功响应的回调函数
+				var success = function(response) {
+					var dataType = dataTypeEl;
+					if(dataType === 'json') {
+						response = JSON.stringify(response); //JSON.stringify()将 JSON对象转为json字符串
+					} else if(dataType === 'xml') {
+						response = new XMLSerializer().serializeToString(response).replace(/</g, "&lt;").replace(/>/g, "&gt;");
+					}
+					/*--------------------------------------------------*/
+					//得到数据之后的操作
+
+					alert(response);
+
+					var obj = eval("(" + response + ")");
+					//var obj = eval(response);
+					//alert(obj.atb_items_get_response.items.aitaobao_item[0].commission); //打印出来
+					//alert(obj.atb_items_get_response.items.aitaobao_item.length + "dd"); //打印出来
+					address_html = '';
+					//方式一：使用eval解析
+					for(i = 0; i < obj.atb_items_get_response.items.aitaobao_item.length; i++) {
+						//                for(var str in obj.atb_items_get_response.items.aitaobao_item){
+						var str = obj.atb_items_get_response.items.aitaobao_item[i];
+//						alert(str.pic_url);
+
+//<li class="bdr-bom">
+//					<a href="http://item.m.jd.com/product/3710066.html" onclick="return seckillMPingCommoddity(this.href, '3710066')">
+//						<div class="skill-pic">
+//							<div class="img">
+//							<img src="//m.360buyimg.com/mobilecms/s220x220_jfs/t3163/90/2909351582/208074/5462d164/57e8f01dNb39a74b8.jpg!q70.jpg" style="animation: fade 400ms 0s;"></div></div>
+//						<p class="g-title">荣事达 （Royalstar ）多用途锅电火锅5L鸳鸯锅HG1826</p>
+//						<p class="g-price"><i class="doller">￥</i>139<span class="f-s-12"></span></p>
+//						<div class="skill-price">
+//							<p class="g-price-odd"><del>￥299</del></p>
+//							<div class="skill-lod"><span class="sale-count" id="sale-count-b">已秒<em>30%</em></span>
+//								<div id="progress-b" class="kill-progress">
+//									<div class="skill-pro-bg">
+//										<p class="skill-iteam-progress"><span class="skill-pro-insetbg"><span class="skill-iteam-pro" style="width: 30%;"></span></span>
+//										</p>
+//									</div>
+//								</div>
+//							</div>
+//						</div><span class="skill-count">去秒杀</span></a>
+//				</li>
+						address_html += "<li class='bdr-bom'>";
+						address_html += " <a href=" + "'http://item.m.jd.com/product/3710066.html'" + ">";
+						address_html += "<div class='skill-pic'>";
+						address_html += "<div class='img'>";
+
+						address_html += "<img src='" + str.pic_url + "'" + "style='animation: fade 400ms 0s;'" + "></div></div>";
+						address_html += "<p class='g-title'>" + str.title + "</p>";
+						address_html += "<p class='g-price' ><i class='doller'>￥</i>" + str.price + "<span class='f-s-12'></span></p>";
+						address_html += "<div class='skill-price'>";
+						address_html += "<p class='g-price-odd' ><del>" + str.price + "</del></p>";
+						address_html += "<div class='skill-lod' ><span class='sale-count' id='sale-count-b'>已秒<em>30%</em></span>";
+						address_html += "<div id='progress-b' class='kill-progress'>";
+						address_html += "<div class='skill-pro-bg'>";
+						address_html += "<p class='skill-iteam-progress'><span class='skill-pro-insetbg'><span class='skill-iteam-pro' style='width: 30%;'></span></span>";
+						address_html += "</p></div></div><div></div><span class='skill-count'>去秒杀</span></a></li>";
+
+						address_html += '';
+
+					}
+					//alert(address_html);
+					document.querySelector('#ddd').innerHTML = address_html;
+
+					//alert(obj.atb_items_get_response.items.aitaobao_item[0].commission); //打印出来
+
+					/*--------------------------------------------------*/
+				};
+				var ajax = function() {
+					//url地址
+					var url = "http://gw.api.taobao.com/router/rest?sign=2E6CD6F164D108BB9B18CD56166BFB1D&timestamp=2016-10-10+17%3A09%3A48&v=2.0&app_key=23191195&method=taobao.atb.items.get&partner_id=top-apitools&session=61025056d4b911fc362d37168b8a5d622d90192b5851140137369862&format=json&keyword=%E5%A5%B3%E8%A3%85&force_sensitive_param_fuzzy=true&fields=open_iid%2Ctitle%2Cnick%2Cpic_url%2Cprice%2Ccommission%2Ccommission_rate%2Ccommission_num%2Ccommission_volume%2Cseller_credit_score%2Citem_location%2Cvolume";
+					//请求方式为post；
+					var type = methodEl;
+					//预期服务器范围的数据类型
+					var dataType = dataTypeEl;
+					//发送数据
+					var data = {}; //这个先暂时空着，后面再继续看
+					//发送请求
+					if(type === 'get') {
+						if(dataType === 'json') {
+							$.getJSON(url, data, success);
+						} else {
+							$.get(url, data, success, dataType);
+						}
+					} else if(type === 'post') {
+						$.post(url, data, success, dataType);
+					}
+				};
+				//发送请求按钮的点击事件
+//				document.getElementById("confirm").addEventListener('tap', function() {
+//					ajax();
+//
+//				});
+				ajax();
+
+			}(mui, document));
+		</script>
+
+	</body>
+
+</html>
