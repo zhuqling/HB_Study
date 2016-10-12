@@ -311,7 +311,9 @@
 					"fonts/mui.ttf",
 					"css/mui.min.css"
 				],
-				"refer": [],
+				"refer": [
+					"pages/productdetail.html"
+				],
 				"priority": 0
 			},
 			"pages/tab-webview-subpage-contact.html": {
@@ -345,6 +347,20 @@
 					"images/add.png",
 					"css/common.css",
 					"js/immersed.js"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"pages/productdetail.html": {
+				"resources": [
+					"js/update.js",
+					"js/mui.min.js",
+					"css/mui.min.css",
+					"fonts/mui.ttf",
+					"js/immersed.js",
+					"js/common.js",
+					"css/common.css",
+					"css/app.css"
 				],
 				"refer": [],
 				"priority": 0

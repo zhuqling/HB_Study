@@ -40,40 +40,6 @@ function updateSerivces(){
 	} );
 }
 /**
- * 调用系统分享
- * 调用
- */
-function shareSystem() {
-	if(plus.os.name!=="Android"){
-		plus.nativeUI.alert("此平台暂不支持系统分享功能!");
-		return;
-	}
-	var intent=new Intent(Intent.ACTION_SEND);
-	var p = "";
-	if(pic&&pic.realUrl){
-		p = pic.realUrl;
-		if(p.substr(0,7)==="file://"){
-			p=p.substr(7);
-		}else if(p.sub(0)!=="/"){
-			p=plus.io.convertLocalFileSystemURL(p);
-		}
-	}
-	var f = new File(p);
-	var uri = Uri.fromFile(f);
-	if(f.exists()&&f.isFile()){
-		console.log("image/*");
-		intent.setType("image/*");
-		intent.putExtra(Intent.EXTRA_STREAM,uri);
-	}else{
-		console.log("text/plain");
-		intent.setType("text/plain");
-	}
-	intent.putExtra(Intent.EXTRA_SUBJECT,"HBuilder");
-	intent.putExtra(Intent.EXTRA_TEXT,sharecontent.value);
-	intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-	main.startActivity(Intent.createChooser(intent,"系统分享"));
-}
-/**
    * 分享操作
    * @param {JSON} sb 分享操作对象s.s为分享通道对象(plus.share.ShareService)
    * @param {Boolean} bh 是否分享链接
@@ -84,6 +50,7 @@ function shareAction(sb,bh) {
 		outLine( "无效的分享服务！" );
 		return;
 	}
+	alert("dd");
 	var msg={content:sharecontent.value,extra:{scene:sb.x}};
 	if(bh){
 		msg.href=sharehref.value;
@@ -141,50 +108,6 @@ function cancelAuth(){try{
 	// 取消授权后需要更新服务列表
 	updateSerivces();
 	outLine( "操作成功！" );}catch(e){alert(e);}
-}
-// 拍照添加图片分享
-function shareCameraPicture(){
-	outSet("拍照添加分享图片：");
-	var cmr=plus.camera.getCamera();
-	cmr.captureImage(function(p){
-		plus.io.resolveLocalFileSystemURL(p,function(entry){
-			pic.src=entry.toLocalURL();
-			pic.realUrl=p;
-			outLine("拍照图片："+pic.realUrl);
-		},function(e){
-			outLine("读取拍照文件错误："+e.message);
-		} );
-	},function(e){
-		outLine( "拍照失败："+e.message );
-	});
-}
-// 从相册添加图片分享
-function shareGalleryPicture(){
-	outSet("从相册添加分享图片：");
-	plus.gallery.pick(function(p){
-		// 从相册返回的路径不需要转换可以直接使用
-		pic.src=p;
-		pic.realUrl=pic.src;
-		outLine("选择图片："+pic.realUrl);
-//      plus.io.resolveLocalFileSystemURL(p,function(entry){
-//			pic.src=entry.toLocalURL();
-//			pic.realUrl=pic.src;
-//			outLine("选择图片："+pic.realUrl);
-//		},function(e){
-//			outLine("读取拍照文件错误："+e.message);
-//		} );
-    });
-}
-// 使用Logo图片分享
-function shareLogoPicture(){
-	outSet("使用Logo分享图片：");
-	var url="_www/logo.png";
-	plus.io.resolveLocalFileSystemURL(url,function(entry){
-		pic.src=entry.toLocalURL();
-		pic.realUrl=url;
-	},function(e){
-		outLine("读取Logo文件错误："+e.message);
-	} );
 }
 // 打开分享
 function shareShow(){
@@ -254,20 +177,8 @@ function shareHref(){
 			<p class="heading">分享内容：</p>
 			<textarea id="sharecontent" rows="3">我正在使用HBuilder+HTML5开发移动应用，赶紧跟我一起来体验！</textarea>
 			<br/><br/>
-			<p class="heading">分享图片：</p>
-			<table style="width:100%;">
-				<tbody>
-					<tr>
-						<td style="width:30%"><div class="button button-select" onclick="shareCameraPicture()">拍照</div></td>
-						<td style="width:30%"><div class="button button-select" onclick="shareGalleryPicture()">相册选取</div></td>
-						<td style="width:30%"><div class="button button-select" onclick="shareLogoPicture()">使用logo图</div></td>
-					</tr>
-				</tbody>
-			</table>
-			<img id="pic" src="../images/add.png"/>
-			<br/>
+			 
 			<div class="button" onclick="shareShow()">分 享</div>
-			<div class="button" onclick="shareSystem()">系统分享</div>
 			<div style="padding: 0.5em 1em;"><hr color="#EEE"/></div>
 			<p class="heading">链接地址：</p>
 			<input id="sharehref" class="sharehref" type="url" value="http://www.dcloud.io/" placeholder="请输入要分享的链接地址"/>

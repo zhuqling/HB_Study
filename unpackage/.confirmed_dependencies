@@ -75,7 +75,9 @@
       "fonts/mui.ttf",
       "css/mui.min.css"
     ],
-    "refer": []
+    "refer": [
+      "pages/productdetail.html"
+    ]
   },
   "pages/tab-webview-subpage-contact.html": {
     "resources": [
@@ -106,6 +108,20 @@
       "images/add.png",
       "css/common.css",
       "js/immersed.js"
-    ]
+    ],
+    "refer": []
+  },
+  "pages/productdetail.html": {
+    "resources": [
+      "js/update.js",
+      "js/mui.min.js",
+      "css/mui.min.css",
+      "fonts/mui.ttf",
+      "js/immersed.js",
+      "js/common.js",
+      "css/common.css",
+      "css/app.css"
+    ],
+    "refer": []
   }
 }

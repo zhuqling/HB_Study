@@ -32,28 +32,8 @@
 	<!--</script>-->
 
 	<body>
-		
-		<script type="text/javascript">
-    (function(win,doc){
-        var s = doc.createElement("script"), h = doc.getElementsByTagName("head")[0];
-        if (!win.alimamatk_show) {
-            s.charset = "gbk";
-            s.async = true;
-            s.src = "http://a.alimama.cn/tkapi.js";
-            h.insertBefore(s, h.firstChild);
-        };
-        var o = {
-            pid: "mm_17105806_13124673_52572651",/*推广单元ID，用于区分不同的推广渠道*/
-            appkey: "",/*通过TOP平台申请的appkey，设置后引导成交会关联appkey*/
-            unid: "",/*自定义统计字段*/
-            type: "click" /* click 组件的入口标志 （使用click组件必设）*/
-        };
-        win.alimamatk_onload = win.alimamatk_onload || [];
-        win.alimamatk_onload.push(o);
-    })(window,document);
-</script>
 
-
+	
 		<header class="mui-bar mui-bar-nav">
 			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
 			<h1 class="mui-title">图文表格</h1>
@@ -61,7 +41,9 @@
 		<div id="pullrefresh" class="mui-content" style="background-color:#fff">
 			<!--<button type="button" id="confirm" class="mui-btn mui-btn-royal search-button">发送请求</button>-->
 
-			<ul id="ddd" class="good-list bdr-b seckilling">
+			<!--<ul id="ddd" class="good-list bdr-b seckilling">-->
+			<ul class="mui-table-view good-list bdr-b seckilling" id="ddd">
+
 				<!--<li class="bdr-bom">
 					<a href="http://item.m.jd.com/product/10340423026.html" onclick="return seckillMPingCommoddity(this.href, '10340423026')">
 						<div class="skill-pic">
@@ -117,7 +99,12 @@
 							contentrefresh: '正在加载...',
 							callback: pullupRefresh
 						}
-					}
+					},
+					preloadPages:{
+    id:'productdetail.html',
+    url:'productdetail.html'           
+  }
+  
 				});
 
 				var datalength; //定义默认数据长度
@@ -145,7 +132,7 @@
 
 					obj = eval("(" + response + ")");
 					datalength = obj.tbk_item_get_response.results.n_tbk_item.length;
-					                alert(datalength);
+//					alert(datalength);
 					if(datalength % counPer == 0) {
 						countZ = datalength / counPer;
 					} else {
@@ -186,13 +173,23 @@
 				};
 				var ajax = function() {
 					//url地址
-					var url = "http://gw.api.taobao.com/router/rest?sign=837F541416FAD7F641D17E0FED84ED3A&timestamp=2016-10-11+11%3A41%3A30&v=2.0&app_key=23477610&method=taobao.tbk.item.get&partner_id=top-apitools&session=61025056d4b911fc362d37168b8a5d622d90192b5851140137369862&format=json&q=%E5%A5%B3%E8%A3%85&force_sensitive_param_fuzzy=true&fields=num_iid%2Ctitle%2Cpict_url%2Csmall_images%2Creserve_price%2Czk_final_price%2Cuser_type%2Cprovcity%2Citem_url%2Cseller_id%2Cvolume%2Cnick";
-					//请求方式为post；
+					var url = "http://gw.api.taobao.com/router/rest?sign=3B81795F351EED1AE734045948DB685B&timestamp=2016-10-12+11%3A44%3A58&v=2.0&app_key=23477610&method=taobao.tbk.item.get&partner_id=top-apitools&session=61025056d4b911fc362d37168b8a5d622d90192b5851140137369862&format=json&q=%E9%A3%9F%E5%93%81&force_sensitive_param_fuzzy=true&fields=num_iid%2Ctitle%2Cpict_url%2Csmall_images%2Creserve_price%2Czk_final_price%2Cuser_type%2Cprovcity%2Citem_url%2Cseller_id%2Cvolume%2Cnick";
+//			var url = "http://gw.api.taobao.com/router/rest?sign=3B81795F351EED1AE734045948DB685B&&v=2.0&q=%E9%A3%9F%E5%93%81&force_sensitive_param_fuzzy=true&fields=num_iid%2Ctitle%2Cpict_url%2Csmall_images%2Creserve_price%2Czk_final_price%2Cuser_type%2Cprovcity%2Citem_url%2Cseller_id%2Cvolume%2Cnick";
+
+				//请求方式为post；
 					var type = methodEl;
 					//预期服务器范围的数据类型
 					var dataType = dataTypeEl;
 					//发送数据
-					var data = {}; //这个先暂时空着，后面再继续看
+					var data = {
+//						method:'taobao.tbk.item.get',
+//						app_key:'23477610',
+//						partner_id:'top-apitools',
+//						session:'61025056d4b911fc362d37168b8a5d622d90192b5851140137369862',
+//						format:'json',
+//						timestamp:formatDate((new Date()),"yyyy-MM-dd hh:mm:ss")
+
+					}; //这个先暂时空着，后面再继续看
 					//发送请求
 					if(type === 'get') {
 						if(dataType === 'json') {
@@ -222,18 +219,17 @@
 					setTimeout(function() {
 
 						mui('#pullrefresh').pullRefresh().endPullupToRefresh((++count == countZ)); //参数为true代表没有更多数据了。
-//						alert(obj.atb_items_get_response.items.aitaobao_item.length);
 						address_html = '';
-						//					alert(count);
+//						alert(count);
 						for(var i = 0, len = count * 20; i < len; i++) {
 
-							var str = obj.tbk_item_get_response.results.n_tbk_item[i];
+							var str = obj.tbk_item_get_response.results.n_tbk_item[i]; 
 
 							//						var li = document.createElement('li');
 							//						li.className = 'bdr-bom';
-							address_html += "<li class='bdr-bom'>";
-
-							address_html += " <a href=" + "'" + str.item_url + "'" + ">";
+							//							address_html += "<li class='bdr-bom'>";
+							address_html += "<li class='mui-table-view-cell bdr-bom' id = '" + str.num_iid +"' title = '" + str.title +"'>";
+							address_html += " <a name = 'producturl' href=" + "'" + str.item_url + "'" + ">";
 							address_html += "<div class='skill-pic'>";
 							address_html += "<div class='img'>";
 
@@ -268,26 +264,93 @@
 						mui('#pullrefresh').pullRefresh().pullupLoading();
 					});
 				}
-
-
-function clickUrl(url){
-	mui.openWindow({
-    url:'productdetail.html',
-    id:'productdetail.html',
-    extras:{
-        
-        url:url
-    }
-});
-}
-         var itemid;
-        document.getElementById("productlist").addEventListener('tap', function() {
-
 				ajax();
+ 
+var detailPage = null;
+
+mui(".mui-table-view").on('tap','.mui-table-view-cell',function(){
+//获取id
+var id = this.getAttribute("id"); 
+    var title = this.getAttribute("title"); 
+
+//alert(id);
+//获得详情页面
+if(!detailPage){
+    detailPage = plus.webview.getWebviewById('productdetail.html');
+}
+//alert(detailPage);
+//传值给详情页面，通知加载新数据
+//触发详情页面的newsId事件
+mui.fire(detailPage,'productId',{
+    id:id
+});  //打开新闻详情
+mui.openWindow({
+    id:'productdetail',
+    url:'productdetail.html',
+    extras:{
+		productId:id, //扩展参数
+		title:title 
+	}
+});
+}) 
+
+
+
+  //格式化日期,
+      function formatDate(date,format){
+        var paddNum = function(num){
+          num += "";
+          return num.replace(/^(\d)$/,"0$1");
+        }
+        //指定格式字符
+        var cfg = {
+           yyyy : date.getFullYear() //年 : 4位
+          ,yy : date.getFullYear().toString().substring(2)//年 : 2位
+          ,M  : date.getMonth() + 1  //月 : 如果1位的时候不补0
+          ,MM : paddNum(date.getMonth() + 1) //月 : 如果1位的时候补0
+          ,d  : date.getDate()   //日 : 如果1位的时候不补0
+          ,dd : paddNum(date.getDate())//日 : 如果1位的时候补0
+          ,hh : date.getHours()  //时
+          ,mm : date.getMinutes() //分
+          ,ss : date.getSeconds() //秒
+        }
+        format || (format = "yyyy-MM-dd hh:mm:ss");
+        return format.replace(/([a-z])(\1)*/ig,function(m){return cfg[m];});
+      } 
+
 
 			}(mui, document));
 		</script>
 
+
+
+
+
+
+<script type="text/javascript">
+			(function(win, doc) {
+				var s = doc.createElement("script"),
+					h = doc.getElementsByTagName("head")[0];
+				if(!win.alimamatk_show) {
+					s.charset = "gbk";
+					s.async = true;
+					s.src = "http://a.alimama.cn/tkapi.js";
+					h.insertBefore(s, h.firstChild);
+				};
+				var o = {
+					pid: "mm_17105806_13124673_52572651",
+					/*推广单元ID，用于区分不同的推广渠道*/
+					appkey: "",
+					/*通过TOP平台申请的appkey，设置后引导成交会关联appkey*/
+					unid: "",
+					/*自定义统计字段*/
+					type: "click" /* click 组件的入口标志 （使用click组件必设）*/
+				};
+				win.alimamatk_onload = win.alimamatk_onload || [];
+				win.alimamatk_onload.push(o);
+			})(window, document);
+		</script>
 	</body>
 
 </html>
+	
