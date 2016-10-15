@@ -176,26 +176,43 @@
 					 var url = "http://gw.api.taobao.com/router/rest";
 
 					var app_key = '23477610';
-					var fields = 'open_iid,title,nick,pic_url,price,commission,commission_rate,commission_num,commission_volume,seller_credit_score,item_location,volume';
+					var fields = 'num_iid,title,pict_url,small_images,reserve_price,zk_final_price,user_type,provcity,item_url,seller_id,volume,nick';
 					var force_sensitive_param_fuzzy = 'true';
 					var format = 'json';
 					var method = 'taobao.tbk.item.get';
 					var partner_id = 'top-apitools';
 					var q = '女装';
 					var session = '61025056d4b911fc362d37168b8a5d622d90192b5851140137369862';
-					var timestamp = formatDate(new Date, "yyyy-MM-dd hh:mm:ss");
+					var date = new Date;
+					var dateR = formatDate(date,"yyyy-MM-dd");
+					var timestamp = formatDate(date,"14:28:15");
+					var time = "2016-10-15 14:28:15";
 					var v = '2.0';
+ 
+					var AppSecret = '7c8ef2459b4ef45bedc77ee6a8c95a77';
+					alert(timestamp);
+					var sign = hex_md5(EncodeUtf8(AppSecret + app_key + fields + force_sensitive_param_fuzzy + format + method + partner_id + q + session + time + v + AppSecret));
 
-					var AppSecret = '37816bdccb833eee4e66e47e3ec300d3';
-					//alert(timestamp);
-					var sign = hex_md5(AppSecret + app_key + fields + force_sensitive_param_fuzzy + format + method + partner_id + q + session + timestamp + v + AppSecret);
+                    sign = sign.toUpperCase();
+					alert(sign); 
+					 
+					alert(EncodeUtf8("14:28:15"));//url地址
+// var url = 'http://gw.api.taobao.com/router/rest?app_key=23477610&force_sensitive_param_fuzzy=true&format=json&method=taobao.tbk.item.get&partner_id=top-apitools&q=%E5%A5%B3%E8%A3%85&session=61025056d4b911fc362d37168b8a5d622d90192b5851140137369862&timestamp=2016-10-15+14%3A28%3A15&v=2.0&sign=A2B95D684117702C3697CD431EC4D08C&fields=num_iid%2Ctitle%2Cpict_url%2Csmall_images%2Creserve_price%2Czk_final_price%2Cuser_type%2Cprovcity%2Citem_url%2Cseller_id%2Cvolume%2Cnick';					var url = "http://gw.api.taobao.com/router/rest";
+ var url = "http://gw.api.taobao.com/router/rest?"+"app_key=" + EncodeUtf8(app_key) + 
+                                                   "&force_sensitive_param_fuzzy=" + EncodeUtf8(force_sensitive_param_fuzzy) +
+                                                   "&format=" + EncodeUtf8(format) +  
+                                                   "&method=" + EncodeUtf8(method) + 
+                                                   "&partner_id=" + EncodeUtf8(partner_id) +
+                                                   "&q=" + EncodeUtf8(q) +
+                                                   "&session=" + EncodeUtf8(session) + 
+//                                                 "&timestamp=" + dateR + "+" + EncodeUtf8(timestamp) + 
 
-					alert(sign);
-					url = url + sign + method + app_key + partner_id + session + format + timestamp + q + v + force_sensitive_param_fuzzy + fields;
-					
-					alert(EncodeUtf8(url));//url地址
-// var url = 'http://gw.api.taobao.com/router/rest?sign=C62BA3EA60088BBDD356B6656756B61D&timestamp=2016-10-13+18%3A03%3A04&v=2.0&app_key=23477610&method=taobao.tbk.item.get&partner_id=top-apitools&session=610152089652548a5ffad8dc18ee12bea47e3b0e65eeefb137369862&format=json&q=%E4%B9%A6%E6%9C%AC&force_sensitive_param_fuzzy=true&fields=num_iid%2Ctitle%2Cpict_url%2Csmall_images%2Creserve_price%2Czk_final_price%2Cuser_type%2Cprovcity%2Citem_url%2Cseller_id%2Cvolume%2Cnick';					var url = "http://gw.api.taobao.com/router/rest";
- var url = "http://gw.api.taobao.com/router/rest";
+                                                   "&timestamp=2016-10-15+14%3A28%3A15" + 
+
+                                                   "&v=" + EncodeUtf8(v) +
+                                                   "&sign=" + EncodeUtf8(sign) + 
+                                                   "&fields=" + EncodeUtf8(fields);
+					console.log(url);//url地址
 
 					//请求方式为post；
 					var type = methodEl;
